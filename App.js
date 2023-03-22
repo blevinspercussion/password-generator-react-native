@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
 
 import Switch from "./components/Switch";
 import GenerateButton from "./components/GenerateButton";
@@ -22,10 +23,19 @@ export default function App() {
   return (
     <View style={styles.appContainer}>
       <Text style={styles.title}>Password Generator</Text>
-      <Switch />
-      <Switch />
-      <Switch />
-      <Switch />
+      <Switch
+        switchName={"capital letters"}
+        switch={characterSwitches.capital}
+      />
+      <Switch
+        switchName={"lowercase letters"}
+        switch={characterSwitches.lowercase}
+      />
+      <Switch switchName={"numbers"} switch={characterSwitches.numbers} />
+      <Switch
+        switchName={"special characters"}
+        switch={characterSwitches.special}
+      />
       <GenerateButton />
     </View>
   );
@@ -38,6 +48,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   title: {
-    fontSize: 25,
+    fontSize: 35,
   },
 });

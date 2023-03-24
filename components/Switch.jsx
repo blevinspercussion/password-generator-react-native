@@ -7,7 +7,7 @@ export default function Switch(props, { handleSwitches }) {
 
   const handlePress = () => {
     setIsActive(!isActive);
-    props.handleSwitches(props.switchName, props.switch);
+    props.handleSwitches(props.switch, props.switchValue);
   };
 
   return (

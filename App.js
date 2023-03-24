@@ -16,11 +16,6 @@ export default function App() {
   });
   const [passwordLength, setPasswordLength] = useState(10);
 
-  const capitalLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-  const lowercaseLetters = "abcdefghijklmnopqrstuvwxyz".split("");
-  const numbers = "1234567890".split("");
-  const special = "!@#$%^&*(){}/=?+,.<>".split("");
-
   const handleSwitches = (switchName, characterSwitch) => {
     setCharacterSwitches({
       ...characterSwitches,
@@ -32,36 +27,70 @@ export default function App() {
     setPasswordLength(sliderValue);
   };
 
-  const handlePasswordGenerator = () => {};
+  const handlePasswordGenerator = () => {
+    const capitalLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+    const lowercaseLetters = "abcdefghijklmnopqrstuvwxyz".split("");
+    const numbers = "1234567890".split("");
+    const special = "!@#$%^&*(){}/=?+,.<>".split("");
+    let characters = [];
+    let newPassword = "";
+    if (characterSwitches.capital === true) {
+      characters = characters.concat(capitalLetters);
+    }
+    if (characterSwitches.lowercase === true) {
+      characters = characters.concat(lowercaseLetters);
+    }
+    if (characterSwitches.numbers === true) {
+      characters = characters.concat(numbers);
+    }
+    if (characterSwitches.special === true) {
+      characters = characters.concat(special);
+    }
+
+    for (let i = 0; i < passwordLength; i++) {
+      let randomCharacter =
+        characters[Math.floor(Math.random() * characters.length)];
+      newPassword += randomCharacter;
+    }
+    setPassword(newPassword);
+    console.log(characters);
+    console.log(characterSwitches);
+    console.log(newPassword);
+    console.log(password);
+  };
 
   return (
     <View style={styles.appContainer}>
       <Text style={styles.title}>Password Generator</Text>
       <LengthSlider
-        handlePasswordLength={setPasswordLength}
+        handlePasswordLength={handlePasswordLength}
         passwordLength={passwordLength}
       />
       <Switch
         switchName={"capital letters"}
-        switch={characterSwitches.capital}
+        switch={"capital"}
+        switchValue={characterSwitches.capital}
         handleSwitches={handleSwitches}
       />
       <Switch
         switchName={"lowercase letters"}
-        switch={characterSwitches.lowercase}
+        switch={"lowercase"}
+        switchValue={characterSwitches.lowercase}
         handleSwitches={handleSwitches}
       />
       <Switch
         switchName={"numbers"}
-        switch={characterSwitches.numbers}
+        switch={"numbers"}
+        switchValue={characterSwitches.numbers}
         handleSwitches={handleSwitches}
       />
       <Switch
         switchName={"special characters"}
-        switch={characterSwitches.special}
+        switch={"special"}
+        switchValue={characterSwitches.special}
         handleSwitches={handleSwitches}
       />
-      <GenerateButton />
+      <GenerateButton handlePasswordGenerator={handlePasswordGenerator} />
     </View>
   );
 }

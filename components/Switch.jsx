@@ -2,12 +2,12 @@ import { StyleSheet } from "react-native";
 import { View, TouchableOpacity, Text } from "react-native";
 import { useState } from "react";
 
-export default function Switch(props) {
+export default function Switch(props, { handleSwitches }) {
   const [isActive, setIsActive] = useState(false);
 
   const handlePress = () => {
     setIsActive(!isActive);
-    console.log(isActive);
+    props.handleSwitches(props.switchName, props.switch);
   };
 
   return (

@@ -4,7 +4,7 @@ import Slider from "@react-native-community/slider";
 
 export default function (props, { handlePasswordLength }) {
   const handleSlider = (e) => {
-    props.handlePasswordLength(e.target.value);
+    props.handlePasswordLength(e);
   };
 
   return (
@@ -13,7 +13,7 @@ export default function (props, { handlePasswordLength }) {
         <Text style={styles.text}>Enter Password Length Below</Text>
         <Text style={styles.text}>{props.passwordLength}</Text>
       </View>
-      <TextInput keyboardType="number-pad" onChange={handleSlider} />
+      <TextInput keyboardType="number-pad" onChangeText={handleSlider} />
       {/* <input
         type="range"
         min={10}

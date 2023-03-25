@@ -24,8 +24,8 @@ export default function App() {
     });
   };
 
-  const handlePasswordLength = (sliderValue) => {
-    setPasswordLength(sliderValue);
+  const handlePasswordLength = (e) => {
+    setPasswordLength(e);
   };
 
   const handlePasswordGenerator = () => {

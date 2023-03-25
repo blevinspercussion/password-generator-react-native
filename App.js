@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     alignItems: "center",
     justifyContent: "center",
-    width: 500,
+    width: "100%",
     backgroundColor: "white",
   },
   errorText: {

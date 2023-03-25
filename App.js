@@ -94,50 +94,52 @@ export default function App() {
 
   return (
     <View style={styles.appContainer}>
-      <Text style={styles.title}>Password Generator</Text>
-      <LengthSlider
-        handlePasswordLength={handlePasswordLength}
-        passwordLength={passwordLength}
-      />
-      <Switch
-        switchName={"capital letters"}
-        switch={"capital"}
-        switchValue={characterSwitches.capital}
-        handleSwitches={handleSwitches}
-      />
-      <Switch
-        switchName={"lowercase letters"}
-        switch={"lowercase"}
-        switchValue={characterSwitches.lowercase}
-        handleSwitches={handleSwitches}
-      />
-      <Switch
-        switchName={"numbers"}
-        switch={"numbers"}
-        switchValue={characterSwitches.numbers}
-        handleSwitches={handleSwitches}
-      />
-      <Switch
-        switchName={"special characters"}
-        switch={"special"}
-        switchValue={characterSwitches.special}
-        handleSwitches={handleSwitches}
-      />
-      <GenerateButton handlePasswordGenerator={handlePasswordGenerator} />
-      <PasswordOutput
-        password={password}
-        lengthError={lengthError}
-        switchError={switchError}
-      />
-      <View>
-        <Text style={styles.errorText}>
-          {switchError
-            ? "You must choose at least one option from the choices above"
-            : ""}
-        </Text>
-        <Text style={styles.errorText}>
-          {lengthError ? "You must choose a length between 10 and 30" : ""}
-        </Text>
+      <View style={styles.contentContainer}>
+        <Text style={styles.title}>Password Generator</Text>
+        <LengthSlider
+          handlePasswordLength={handlePasswordLength}
+          passwordLength={passwordLength}
+        />
+        <Switch
+          switchName={"capital letters"}
+          switch={"capital"}
+          switchValue={characterSwitches.capital}
+          handleSwitches={handleSwitches}
+        />
+        <Switch
+          switchName={"lowercase letters"}
+          switch={"lowercase"}
+          switchValue={characterSwitches.lowercase}
+          handleSwitches={handleSwitches}
+        />
+        <Switch
+          switchName={"numbers"}
+          switch={"numbers"}
+          switchValue={characterSwitches.numbers}
+          handleSwitches={handleSwitches}
+        />
+        <Switch
+          switchName={"special characters"}
+          switch={"special"}
+          switchValue={characterSwitches.special}
+          handleSwitches={handleSwitches}
+        />
+        <GenerateButton handlePasswordGenerator={handlePasswordGenerator} />
+        <PasswordOutput
+          password={password}
+          lengthError={lengthError}
+          switchError={switchError}
+        />
+        <View>
+          <Text style={styles.errorText}>
+            {switchError
+              ? "You must choose at least one option from the choices above"
+              : ""}
+          </Text>
+          <Text style={styles.errorText}>
+            {lengthError ? "You must choose a length between 10 and 30" : ""}
+          </Text>
+        </View>
       </View>
     </View>
   );
@@ -148,6 +150,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "black",
+  },
+  contentContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: 500,
+    backgroundColor: "white",
   },
   errorText: {
     fontSize: 25,

@@ -11,7 +11,15 @@ export default function Switch(props, { handleSwitches }) {
   };
 
   return (
-    <View style={{ backgroundColor: isActive ? "red" : "white" }}>
+    <View
+      style={{
+        backgroundColor: isActive ? "red" : "white",
+        marginVertical: 10,
+        padding: 3,
+        borderWidth: 2,
+        borderColor: "black",
+      }}
+    >
       <TouchableOpacity onPress={handlePress}>
         <Text style={styles.text}>Include {props.switchName}</Text>
       </TouchableOpacity>
@@ -20,14 +28,7 @@ export default function Switch(props, { handleSwitches }) {
 }
 
 const styles = StyleSheet.create({
-  containerInactive: {
-    marginVertical: 10,
-    backgroundColor: "white",
-  },
-  containerActive: {
-    marginVertical: 10,
-    backgroundColor: "red",
-  },
+  container: {},
   text: {
     fontSize: 20,
   },

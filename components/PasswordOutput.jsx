@@ -10,12 +10,16 @@ export default function PasswordOutput(props) {
   );
 }
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     alignItem: "center",
     justifyContent: "center",
   },
+  errorText: {
+    fontSize: 20,
+    color: "red",
+  },
   text: {
     fontSize: 20,
   },
-};
+});

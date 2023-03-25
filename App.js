@@ -6,6 +6,7 @@ import LengthSlider from "./components/LengthSlider";
 import Switch from "./components/Switch";
 import GenerateButton from "./components/GenerateButton";
 import PasswordOutput from "./components/PasswordOutput";
+import ErrorMessages from "./components/ErrorMessages";
 
 export default function App() {
   const [password, setPassword] = useState("");
@@ -16,12 +17,37 @@ export default function App() {
     special: false,
   });
   const [passwordLength, setPasswordLength] = useState(10);
+  const [lengthError, setLengthError] = useState(false);
+  const [switchError, setSwitchError] = useState(true);
+
+  let switchErrorMessage = "";
+  let lengthErrorMessage = "";
+
+  const handleErrorMessages = () => {
+    if (switchError) {
+      switchErrorMessage =
+        "Mest select at least one option from the choices above.";
+    }
+
+    if (lengthError) {
+      lengthErrorMessage = (
+        <Text style={styles.errorText}>
+          Length must be between 10 and 30 characters.
+        </Text>
+      );
+    }
+  };
 
   const handleSwitches = (switchName, characterSwitch) => {
     setCharacterSwitches({
       ...characterSwitches,
       [switchName]: !characterSwitch,
     });
+    if (characterSwitch === false) {
+      setSwitchError(true);
+    } else {
+      setSwitchError(false);
+    }
   };
 
   const handlePasswordLength = (e) => {
@@ -35,6 +61,7 @@ export default function App() {
     const special = "!@#$%^&*(){}/=?+,.<>".split("");
     let characters = [];
     let newPassword = "";
+    setSwitchError(false);
     if (characterSwitches.capital === true) {
       characters = characters.concat(capitalLetters);
     }
@@ -51,6 +78,12 @@ export default function App() {
     for (let i = 0; i < passwordLength; i++) {
       let randomCharacter =
         characters[Math.floor(Math.random() * characters.length)];
+      if (randomCharacter === undefined) {
+        setSwitchError(true);
+        handleErrorMessages();
+        break;
+      }
+
       newPassword += randomCharacter;
     }
     setPassword(newPassword);
@@ -88,7 +121,21 @@ export default function App() {
         handleSwitches={handleSwitches}
       />
       <GenerateButton handlePasswordGenerator={handlePasswordGenerator} />
-      <PasswordOutput password={password} />
+      <PasswordOutput
+        password={password}
+        lengthError={lengthError}
+        switchError={switchError}
+      />
+      <ErrorMessages
+        switchErrorMessage={switchErrorMessage}
+        lengthErrorMessage={lengthErrorMessage}
+      />
+      <Text style={styles.errorText}>
+        {switchError
+          ? "You must choose at least one option from the choices above"
+          : ""}
+      </Text>
+      <Text style={styles.errorText}>{lengthErrorMessage}</Text>
     </View>
   );
 }
@@ -98,6 +145,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+  },
+  errorText: {
+    fontSize: 25,
+    color: "red",
   },
   title: {
     fontSize: 35,

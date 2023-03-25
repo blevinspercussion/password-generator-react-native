@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native-web";
 import { View, Text, TextInput } from "react-native";
-import Slider from "@react-native-community/slider";
 
 export default function (props, { handlePasswordLength }) {
   const handleSlider = (e) => {
@@ -11,22 +10,13 @@ export default function (props, { handlePasswordLength }) {
     <View style={styles.container}>
       <View style={styles.container}>
         <Text style={styles.text}>Enter Password Length Below</Text>
-        <Text style={styles.text}>{props.passwordLength}</Text>
       </View>
-      <TextInput keyboardType="number-pad" onChangeText={handleSlider} />
-      {/* <input
-        type="range"
-        min={10}
-        max={30}
+      <TextInput
+        style={styles.passwordLengthInput}
+        keyboardType="number-pad"
+        onChangeText={handleSlider}
         defaultValue={10}
-        onChange={handleSlider}
-      ></input> */}
-      {/* <Slider
-        style={styles.slider}
-        minimumValue={10}
-        maximumValue={30}
-        // onValueChange={handleSlider}
-      ></Slider> */}
+      />
     </View>
   );
 }
@@ -39,9 +29,13 @@ const styles = StyleSheet.create({
   },
   passwordLengthInput: {
     backgroundColor: "grey",
+    borderWidth: 2,
+    borderColor: "black",
+    width: 25,
   },
   slider: {
-    width: 200,
+    borderWitth: 2,
+    borderColor: "black",
   },
   text: {
     fontSize: 20,

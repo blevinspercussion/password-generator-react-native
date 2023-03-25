@@ -26,15 +26,11 @@ export default function App() {
   const handleErrorMessages = () => {
     if (switchError) {
       switchErrorMessage =
-        "Mest select at least one option from the choices above.";
+        "Must select at least one option from the choices above.";
     }
 
     if (lengthError) {
-      lengthErrorMessage = (
-        <Text style={styles.errorText}>
-          Length must be between 10 and 30 characters.
-        </Text>
-      );
+      console.log("inside length error");
     }
   };
 
@@ -62,6 +58,7 @@ export default function App() {
     let characters = [];
     let newPassword = "";
     setSwitchError(false);
+    setLengthError(false);
     if (characterSwitches.capital === true) {
       characters = characters.concat(capitalLetters);
     }
@@ -73,6 +70,12 @@ export default function App() {
     }
     if (characterSwitches.special === true) {
       characters = characters.concat(special);
+    }
+
+    if (passwordLength < 10 || passwordLength > 30) {
+      setLengthError(true);
+      handleErrorMessages();
+      return;
     }
 
     for (let i = 0; i < passwordLength; i++) {
@@ -130,12 +133,16 @@ export default function App() {
         switchErrorMessage={switchErrorMessage}
         lengthErrorMessage={lengthErrorMessage}
       />
-      <Text style={styles.errorText}>
-        {switchError
-          ? "You must choose at least one option from the choices above"
-          : ""}
-      </Text>
-      <Text style={styles.errorText}>{lengthErrorMessage}</Text>
+      <View>
+        <Text style={styles.errorText}>
+          {switchError
+            ? "You must choose at least one option from the choices above"
+            : ""}
+        </Text>
+        <Text style={styles.errorText}>
+          {lengthError ? "You must choose a length between 10 and 30" : ""}
+        </Text>
+      </View>
     </View>
   );
 }

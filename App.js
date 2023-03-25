@@ -19,9 +19,6 @@ export default function App() {
   const [lengthError, setLengthError] = useState(false);
   const [switchError, setSwitchError] = useState(false);
 
-  let switchErrorMessage = "";
-  let lengthErrorMessage = "";
-
   const handleErrorMessages = () => {
     if (switchError) {
       switchErrorMessage =

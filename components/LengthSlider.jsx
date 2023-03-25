@@ -13,7 +13,7 @@ export default function (props, { handlePasswordLength }) {
         <Text style={styles.text}>Enter Password Length Below</Text>
         <Text style={styles.text}>{props.passwordLength}</Text>
       </View>
-      <TextInput keyboardType="number-pad" />
+      <TextInput keyboardType="number-pad" onChange={handleSlider} />
       {/* <input
         type="range"
         min={10}

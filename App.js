@@ -54,10 +54,6 @@ export default function App() {
       newPassword += randomCharacter;
     }
     setPassword(newPassword);
-    console.log(characters);
-    console.log(characterSwitches);
-    console.log(newPassword);
-    console.log(password);
   };
 
   return (

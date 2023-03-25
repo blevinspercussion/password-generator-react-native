@@ -6,7 +6,6 @@ import LengthSlider from "./components/LengthSlider";
 import Switch from "./components/Switch";
 import GenerateButton from "./components/GenerateButton";
 import PasswordOutput from "./components/PasswordOutput";
-import ErrorMessages from "./components/ErrorMessages";
 
 export default function App() {
   const [password, setPassword] = useState("");
@@ -18,7 +17,7 @@ export default function App() {
   });
   const [passwordLength, setPasswordLength] = useState(10);
   const [lengthError, setLengthError] = useState(false);
-  const [switchError, setSwitchError] = useState(true);
+  const [switchError, setSwitchError] = useState(false);
 
   let switchErrorMessage = "";
   let lengthErrorMessage = "";
@@ -39,11 +38,6 @@ export default function App() {
       ...characterSwitches,
       [switchName]: !characterSwitch,
     });
-    if (characterSwitch === false) {
-      setSwitchError(true);
-    } else {
-      setSwitchError(false);
-    }
   };
 
   const handlePasswordLength = (e) => {
@@ -59,6 +53,12 @@ export default function App() {
     let newPassword = "";
     setSwitchError(false);
     setLengthError(false);
+    if (Object.values(characterSwitches).every((v) => v === false)) {
+      setSwitchError(true);
+      handleErrorMessages();
+    } else {
+      setSwitchError(false);
+    }
     if (characterSwitches.capital === true) {
       characters = characters.concat(capitalLetters);
     }
@@ -129,10 +129,6 @@ export default function App() {
         lengthError={lengthError}
         switchError={switchError}
       />
-      <ErrorMessages
-        switchErrorMessage={switchErrorMessage}
-        lengthErrorMessage={lengthErrorMessage}
-      />
       <View>
         <Text style={styles.errorText}>
           {switchError
@@ -156,6 +152,7 @@ const styles = StyleSheet.create({
   errorText: {
     fontSize: 25,
     color: "red",
+    textAlign: "center",
   },
   title: {
     fontSize: 35,

@@ -5,6 +5,7 @@ import { useState } from "react";
 import LengthSlider from "./components/LengthSlider";
 import Switch from "./components/Switch";
 import GenerateButton from "./components/GenerateButton";
+import PasswordOutput from "./components/PasswordOutput";
 
 export default function App() {
   const [password, setPassword] = useState("");
@@ -91,6 +92,7 @@ export default function App() {
         handleSwitches={handleSwitches}
       />
       <GenerateButton handlePasswordGenerator={handlePasswordGenerator} />
+      <PasswordOutput password={password} />
     </View>
   );
 }
